@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cmath>
+
+using namespace std; 
+
+int main()
+{
+    //Declaring the variables below
+  double partyBudget, slicePrice, piePrice, costForParty, overBudget, leftOver;
+  int totalPeople, totalPies, totalSlices, numSlices , sumSlices = 0, peopleCounter = 1;
+  
+    //Asking the user to input information below
+  
+    cout<< "Enter budget for your party: ";
+    cin>>partyBudget;
+    
+    
+    cout<< "Cost per slice of pizza: ";
+    cin>>slicePrice;
+    
+    
+    cout<< "Cost per whole pizza pie (8 slices): ";
+    cin>>piePrice;
+ 
+    
+    cout<< "How many people will be attending your party? ";
+    cin>>totalPeople;
+ 
+  
+    //Below is a loop that will input an amount of slices per person attending the pizza party
+        do {
+           
+            cout<< "Enter number of slices for person #"<<peopleCounter<<": ";
+            cin>>numSlices;
+            sumSlices += numSlices;
+            peopleCounter++;
+       
+        //the loop will continue until the increment meets the amount of people that are attending. 1 iteration per person
+        }while (peopleCounter <= totalPeople);
+    
+    //Used to calculate how many pies/slices will be needed
+    totalPies = sumSlices / 8;
+    totalSlices = sumSlices % 8;
+    
+    //Used to calculate cost for the party
+    costForParty = (totalPies * piePrice) + (totalSlices * slicePrice);
+    
+    //if statment used to calculate if the user can afford to have the pizza party
+    if (costForParty <= partyBudget ) {
+        
+        
+        cout<< "You should purchase "<<totalPies<<" pies and "<<totalSlices<< " slices" <<endl;
+        cout<< "Your total cost will be: "<<fixed<<setprecision(2)<<costForParty<<endl;
+        
+            //Nested if statement letting the user know if they'll have money left over and how much
+            if (costForParty < partyBudget) {
+            
+            leftOver = partyBudget - costForParty;
+                cout<< "You will still have "<<fixed<<setprecision(2)<<leftOver<< " left after your order"<<endl;
+            }    
+            else
+            cout<<"You will have no money left after your order."<<endl;
+    }        
+        
+    //letting the user know that they dont have enough money for the pizza party        
+    else {
+        cout<< "Your order cannot be completed."<<endl;
+        cout<< "You would need to purchase "<<totalPies<<" pies and "<<totalSlices<< " slices"<<endl;
+        
+        
+        overBudget = costForParty - partyBudget;
+        cout<< "This would put you over budget by "<<fixed<<setprecision(2)<<overBudget<<endl;
+    }
+    
+   
+   return 0; 
+} 
